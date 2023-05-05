@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariaavoletta <mariaavoletta@student.42    +#+  +:+       +#+        */
+/*   By: marioliv <marioliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:24:31 by marioliv          #+#    #+#             */
-/*   Updated: 2023/05/05 11:50:45 by mariaavolet      ###   ########.fr       */
+/*   Updated: 2023/05/05 15:57:41 by marioliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*get_next_line(int fd)
 		free(backup);
 		backup = NULL;
 		return (NULL);
-	}
+	} 
 	backup = looping(line);
 	return (line);
 }
