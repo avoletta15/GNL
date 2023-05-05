@@ -12,28 +12,6 @@
 
 #include "get_next_line.h"
 
-/* char	*looping(char *line)
-{
-	char	*backup;
-	size_t	i;
-
-	i = 0;
-	while (line[i] != '\0' && line[i] != '\n')
-		i++;
-	if (line[i] == '\0') // quando a linha em si ja nao tem nada
-		return (NULL);
-	backup = ft_substr(line, i + 1, ft_strlen(line) - i);
-	if (*backup == '\0') // para ter certeza que o byte apos a quebra de linha
-	// ou o suposto final da string eh mesmo o final
-	{
-		free(backup);
-		return (NULL);
-	}
-	line[i + 1] = '\0';
-	return (backup);
-} */
-
-
 char	*looping(char *line)
 {
 	char	*backup;
@@ -54,7 +32,6 @@ char	*looping(char *line)
 		return (backup);
 	}
 	return (NULL);
-	free(backup);
 }
 
 
@@ -86,17 +63,17 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0) //BUFFER_SIZE vai ser definido da biblio
-		return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return(NULL);
 	buffer = (char *)malloc(sizeof(char *) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL); 
-	line = maria(fd, buffer, backup);
-	
+	line = maria(fd, buffer, backup);	
 	free(buffer);
 	if (!line)
 	{
 		free(backup);
+		backup = NULL;
 		return (NULL);
 	}
 	backup = looping(line);
@@ -110,7 +87,7 @@ char	*get_next_line(int fd)
     int     check;
 	
     check = 1;
-    fd = open("biru.txt", O_RDONLY);
+    fd = open("teste.txt", O_RDONLY);
     printf("\nBuff_size: %d\n", BUFFER_SIZE);
     while (check)
     {
