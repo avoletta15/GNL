@@ -6,7 +6,7 @@
 /*   By: marioliv <marioliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:24:31 by marioliv          #+#    #+#             */
-/*   Updated: 2023/05/05 15:57:41 by marioliv         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:40:17 by marioliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*looping(char *line)
 	{	
 		if (line[++i] == '\0')
 		{
-			backup = NULL; //causa double free quando o primeiro char lido no line e '\0'
+			backup = NULL; 
 			return (NULL);
 		}
 		backup = ft_substr(line, i, ft_strlen(line) - (i - 1));
@@ -39,13 +39,13 @@ char	*maria(int fd, char *buffer, char *line)
 {
 	int		i;
 
-	i = -1; // read retorna o numero real de bytes lidos, do contrario, retorna <0
+	i = -1; /* read retorna o numero real de bytes lidos, do contrario, retorna <0 */
 	while (i != 0)
 	{
-		i = read(fd, buffer, BUFFER_SIZE);
+		i = read(fd, buffer, BUFFER_SIZE); /* queremos saber em qual posicao da linha o nosso contadro estaa*/
 		if (i < 0)
-			return (NULL);// nesse caso, o file nao existe
-		else if (i == 0) // nesse caso, o file nao tem nada
+			return (NULL); /* nesse caso, o file nao existe ou deu erro */ 
+		else if (i == 0) /* nesse caso, o file nao tem nada dentro */
 			break ; 
 		buffer[i] = '\0';
 		if (!line)
@@ -59,11 +59,12 @@ char	*maria(int fd, char *buffer, char *line)
 
 char	*get_next_line(int fd)
 {
-	static char	*backup;
+	static char	*backup; /*static variable --> vai preservar o ultimo valor toda vez que a funcao for chamada. ex.: se o valor inicial = 0
+	roda a funcao, o valor passa a ser 10, da prxima vez que a funcao for chamada, o valor vai ser 10*/
 	char		*buffer;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0) /* fe = 0 - nao tem file / BUFFER_SIZE <= 0 nao tem "contador de letras para correr a linha"*/
 		return(NULL);
 	buffer = (char *)malloc(sizeof(char *) * (BUFFER_SIZE + 1));
 	if (!buffer)
@@ -79,25 +80,3 @@ char	*get_next_line(int fd)
 	backup = looping(line);
 	return (line);
 }
-
-/* int main(void)
-{
-    int     fd;
-    char    *line;
-    int     check;
-	
-    check = 1;
-    fd = open("teste.txt", O_RDONLY);
-    printf("\nBuff_size: %d\n", BUFFER_SIZE);
-    while (check)
-    {
-        line = get_next_line(fd);
-        if (!line)
-        {
-            check = 0;
-            printf("\n");
-        }
-        printf("Line: %s", line);
-        free(line);
-    }
-} */
