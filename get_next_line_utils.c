@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marioliv <marioliv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariaavoletta <mariaavoletta@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:02:29 by marioliv          #+#    #+#             */
-/*   Updated: 2023/05/04 18:29:18 by marioliv         ###   ########.fr       */
+/*   Updated: 2023/05/05 09:35:46 by mariaavolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*ft_strdup(const char *s)
 	return (str);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	int		a;
@@ -101,6 +101,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 	}
 	str[i] = '\0';
+	free(s1);
 	return (str);
 }
 

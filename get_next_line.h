@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marioliv <marioliv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariaavoletta <mariaavoletta@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:06:14 by marioliv          #+#    #+#             */
-/*   Updated: 2023/05/04 18:29:13 by marioliv         ###   ########.fr       */
+/*   Updated: 2023/05/05 09:35:50 by mariaavolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,14 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-char	*get_line(int fd, char *buffer, char *backup);
+char	*maria(int fd, char *buffer, char *backup);
+char	*get_next_line(int fd);
 char	*looping(char *line);
 char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+void	*ft_memset(void *s, int a, size_t n);
+void	ft_bzero(void *s, size_t n);
+
 
 # endif

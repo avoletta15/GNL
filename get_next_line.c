@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marioliv <marioliv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariaavoletta <mariaavoletta@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:24:31 by marioliv          #+#    #+#             */
-/*   Updated: 2023/05/04 19:16:09 by marioliv         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:50:45 by mariaavolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 	}
 	line[i + 1] = '\0';
 	return (backup);
-}
- */
+} */
+
 
 char	*looping(char *line)
 {
@@ -58,7 +58,7 @@ char	*looping(char *line)
 }
 
 
-char	*get_line(int fd, char *buffer, char *line)
+char	*maria(int fd, char *buffer, char *line)
 {
 	int		i;
 
@@ -70,7 +70,7 @@ char	*get_line(int fd, char *buffer, char *line)
 			return (NULL);// nesse caso, o file nao existe
 		else if (i == 0) // nesse caso, o file nao tem nada
 			break ; 
-		/* buffer[i] = '\0'; */
+		buffer[i] = '\0';
 		if (!line)
 			line = ft_strdup("");
 		line = ft_strjoin(line, buffer);
@@ -91,25 +91,26 @@ char	*get_next_line(int fd)
 	buffer = (char *)malloc(sizeof(char *) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL); 
-	line = get_line(fd, buffer, backup);
+	line = maria(fd, buffer, backup);
+	
 	free(buffer);
 	if (!line)
 	{
 		free(backup);
 		return (NULL);
 	}
-	backup = looping(line); 
+	backup = looping(line);
 	return (line);
 }
 
-int main(void)
+/* int main(void)
 {
     int     fd;
     char    *line;
     int     check;
 	
     check = 1;
-    fd = open("teste.txt", O_RDONLY);
+    fd = open("biru.txt", O_RDONLY);
     printf("\nBuff_size: %d\n", BUFFER_SIZE);
     while (check)
     {
@@ -122,4 +123,4 @@ int main(void)
         printf("Line: %s", line);
         free(line);
     }
-}
+} */
