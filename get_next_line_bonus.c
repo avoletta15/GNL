@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marioliv <marioliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 15:24:31 by marioliv          #+#    #+#             */
-/*   Updated: 2023/05/11 15:58:24 by marioliv         ###   ########.fr       */
+/*   Created: 2023/05/11 15:54:11 by marioliv          #+#    #+#             */
+/*   Updated: 2023/05/11 15:58:32 by marioliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,27 +60,27 @@ char	*maria(int fd, char *buffer, char *line)
 
 char	*get_next_line(int fd)
 {
-	static char *backup;
+	static char *backup[FOPEN_MAX];
 		/*static variable --> vai preservar o ultimo valor toda vez que a funcao for chamada. ex.: se o valor inicial = 0
 	roda a funcao, o valor passa a ser 10,
 		da prxima vez que a funcao for chamada, o valor vai ser 10*/
 	char *buffer;
 	char *line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0) /* fe = 0 - nao tem file
+	if (fd < 0 || BUFFER_SIZE <= 0 || FOPEN_MAX < fd) /* fe = 0 - nao tem file
 	/ BUFFER_SIZE <= 0 nao tem "contador de letras para correr a linha"*/
 		return (NULL);
 	buffer = (char *)malloc(sizeof(char *) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
-	line = maria(fd, buffer, backup);
+	line = maria(fd, buffer, backup[fd]);
 	free(buffer);
 	if (!line)
 	{
-		free(backup);
-		backup = NULL;
+		free(backup[fd]);
+		backup[fd] = NULL;
 		return (NULL);
 	}
-	backup = looping(line);
+	backup[fd] = looping(line);
 	return (line);
 }
